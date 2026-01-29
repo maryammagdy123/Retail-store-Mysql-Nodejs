@@ -3,8 +3,8 @@ const { db } = require("../DB");
 const addProductHandler = (req, res, next) => {
   const { SupplierID, ProductName, Price, StockQuantity } = req.body;
   const sql = `
-      INSERT INTO products (?, ?, ?, ?)  
-      VALUES [SupplierID, ProductName, Price, StockQuantity]
+      INSERT INTO products (SupplierID, ProductName, Price, StockQuantity)  
+      VALUES (?, ?, ?, ?)
     `;
   db.execute(sql, [SupplierID, ProductName, Price, StockQuantity], (err) => {
     if (err) return res.status(500).json(err);
