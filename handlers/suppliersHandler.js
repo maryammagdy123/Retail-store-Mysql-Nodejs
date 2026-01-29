@@ -4,8 +4,8 @@ const addSupplierHandler = (req, res, next) => {
   const { SupplierName, ContactNumber } = req.body;
 
   const sql = `
-      INSERT INTO suppliers (SupplierName, ContactNumber)
-      VALUES (?, ?)
+      INSERT INTO suppliers (?, ?)
+      VALUES [SupplierName, ContactNumber]
     `;
 
   db.execute(sql, [SupplierName, ContactNumber], (err, result) => {

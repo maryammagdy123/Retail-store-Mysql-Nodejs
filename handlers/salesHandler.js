@@ -4,8 +4,8 @@ const addSaleHandler = (req, res) => {
   const { ProductID, QuantitySold, SaleDate } = req.body;
 
   const sql = `
-    INSERT INTO sales (ProductID,QuantitySold,SaleDate)
-    VALUES (?, ?, ?)
+    INSERT INTO sales (?,?,?)
+    VALUES [ProductID, QuantitySold, SaleDate]
   `;
 
   db.execute(sql, [ProductID, QuantitySold, SaleDate], (err) => {
