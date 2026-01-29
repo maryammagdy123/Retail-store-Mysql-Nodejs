@@ -20,6 +20,8 @@ const {
   quantitySoldHandler,
   salesDetailsHandler,
 } = require("./salesHandler");
+
+const migrationHandlers = require("./migrationHandler");
 module.exports = {
   addSupplierHandler,
   updateSupplierColumnLengthHandler,
@@ -35,4 +37,5 @@ module.exports = {
   filterSuppliersNameHandler,
   neverSoldProductsHandler,
   salesDetailsHandler,
+  migrationHandlers,
 };

@@ -1,12 +1,17 @@
-const { connectDB, db } = require("./DB");
+const { connectDB } = require("./DB");
 
 const express = require("express");
-const { supplierRouter, productRouter, saleRouter } = require("./routes");
+const {
+  supplierRouter,
+  productRouter,
+  saleRouter,
+  migrationRouter,
+} = require("./routes");
 
 const app = express();
 connectDB();
 app.use(express.json());
-
+app.use("/db", migrationRouter);
 app.use("/suppliers", supplierRouter);
 app.use("/products", productRouter);
 app.use("/sales", saleRouter);
