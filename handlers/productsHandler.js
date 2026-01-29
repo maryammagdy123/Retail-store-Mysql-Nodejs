@@ -6,7 +6,7 @@ const addProductHandler = (req, res, next) => {
       INSERT INTO products (SupplierID, ProductName, Price, StockQuantity)  
       VALUES (?, ?, ?, ?)
     `;
-  db.query(sql, [SupplierID, ProductName, Price, StockQuantity], (err) => {
+  db.execute(sql, [SupplierID, ProductName, Price, StockQuantity], (err) => {
     if (err) return res.status(500).json(err);
     res.json({ message: "Product added successfully" });
   });
@@ -20,7 +20,7 @@ const addColumnHandler = (req, res, next) => {
     ADD COLUMN ${columnName} ${data_type}(50)
   `;
 
-  db.query(sql, (err) => {
+  db.execute(sql, (err) => {
     if (err) return res.status(500).json(err);
     res.json({ message: "Category column added to products table" });
   });
@@ -34,7 +34,7 @@ const removeColumnHandler = (req, res, next) => {
     DROP COLUMN ${columnName} 
   `;
 
-  db.query(sql, [columnName], (err) => {
+  db.execute(sql, [columnName], (err) => {
     if (err) return res.status(500).json({ error: "no such column found" });
     res.json({ message: `${columnName} column removed from products table` });
   });
@@ -46,7 +46,7 @@ const addConstraintToColumnHandler = (req, res, next) => {
       ALTER TABLE products
       MODIFY COLUMN ${columnName} ${columnType} ${constraints}
     `;
-  db.query(sql, (err) => {
+  db.execute(sql, (err) => {
     if (err) return res.status(500).json(err);
     res.json({ message: `${columnName} column updated with constraints` });
   });
@@ -60,7 +60,7 @@ const updatePriceHandler = (req, res, next) => {
     WHERE ProductName = ?
   `;
 
-  db.query(sql, [Price, ProductName], (err) => {
+  db.execute(sql, [Price, ProductName], (err) => {
     if (err) return res.status(500).json(err);
     res.json({ message: `Price of ${ProductName} updated to ${Price}` });
   });
@@ -73,7 +73,7 @@ const removeProductHandler = (req, res, next) => {
     DELETE FROM products
     WHERE ProductName = ?
   `;
-  db.query(sql, [ProductName], (err) => {
+  db.execute(sql, [ProductName], (err) => {
     if (err) return res.status(500).json(err);
     res.json({ message: `${ProductName} removed from products table` });
   });
@@ -87,7 +87,7 @@ const highestStockHandler = (req, res, next) => {
     LIMIT 1
   `;
 
-  db.query(sql, (err, result) => {
+  db.execute(sql, (err, result) => {
     if (err) return res.status(500).json(err);
     res.json(result[0]);
   });
@@ -101,7 +101,7 @@ const neverSoldProductsHandler = (req, res, next) => {
     WHERE s.ProductID IS NULL
   `;
 
-  db.query(sql, (err, results) => {
+  db.execute(sql, (err, results) => {
     if (err) return res.status(500).json(err);
     res.json(results);
   });

@@ -11,7 +11,7 @@ const migrationHandlers = {
       )
     `;
 
-    db.query(sql, (err) => {
+    db.execute(sql, (err) => {
       if (err) return res.status(500).json({ message: "table already exists" });
       res.json({ message: "Suppliers table created" });
     });
@@ -32,7 +32,7 @@ const migrationHandlers = {
       )
     `;
 
-    db.query(sql, (err) => {
+    db.execute(sql, (err) => {
       if (err) return res.status(500).json({ message: "table already exists" });
       res.json({ message: "Products table created" });
     });
@@ -52,7 +52,7 @@ const migrationHandlers = {
       )
     `;
 
-    db.query(sql, (err) => {
+    db.execute(sql, (err) => {
       if (err) return res.status(500).json({ message: "table already exists" });
       res.json({ message: "Sales table created" });
     });

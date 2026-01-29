@@ -8,7 +8,7 @@ const addSupplierHandler = (req, res, next) => {
       VALUES (?, ?)
     `;
 
-  db.query(sql, [SupplierName, ContactNumber], (err, result) => {
+  db.execute(sql, [SupplierName, ContactNumber], (err, result) => {
     if (err) return res.status(500).json(err);
     res.json({ message: "Supplier added", id: result.insertId });
   });
@@ -22,7 +22,7 @@ const updateSupplierColumnLengthHandler = (req, res, next) => {
       MODIFY COLUMN ${columnName} ${data_type}(${newLength})
     `;
 
-  db.query(sql, (err) => {
+  db.execute(sql, (err) => {
     if (err) return res.status(500).json(err);
     res.json({ message: `${columnName} column updated` });
   });
@@ -33,7 +33,7 @@ const filterSuppliersNameHandler = (req, res, next) => {
     WHERE SupplierName LIKE 'F%'
   `;
 
-  db.query(sql, (err, results) => {
+  db.execute(sql, (err, results) => {
     if (err) return res.status(500).json(err);
     res.json(results);
   });

@@ -8,7 +8,7 @@ const addSaleHandler = (req, res) => {
     VALUES (?, ?, ?)
   `;
 
-  db.query(sql, [ProductID, QuantitySold, SaleDate], (err) => {
+  db.execute(sql, [ProductID, QuantitySold, SaleDate], (err) => {
     if (err) return res.status(500).json(err);
     res.json({ message: "Sale recorded" });
   });
@@ -24,7 +24,7 @@ const quantitySoldHandler = (req, res, next) => {
     GROUP BY p.ProductName
   `;
 
-  db.query(sql, (err, results) => {
+  db.execute(sql, (err, results) => {
     if (err) return res.status(500).json(err);
     res.json(results);
   });
@@ -40,7 +40,7 @@ const salesDetailsHandler = (req, res) => {
     JOIN products p ON s.ProductID = p.ProductID
   `;
 
-  db.query(sql, (err, results) => {
+  db.execute(sql, (err, results) => {
     if (err) return res.status(500).json(err);
     res.json(results);
   });
